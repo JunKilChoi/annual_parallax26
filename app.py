@@ -12,250 +12,234 @@ st.markdown(
     """
     <style>
         .block-container {
-            padding-top: 0.45rem;
-            padding-bottom: 0.5rem;
-            max-width: 1500px;
+            padding-top: 0.25rem;
+            padding-bottom: 0.4rem;
+            max-width: 1580px;
         }
-        header[data-testid="stHeader"] {
-            height: 0;
-        }
-        #MainMenu, footer {
-            visibility: hidden;
-        }
+        header[data-testid="stHeader"] { height: 0; }
+        #MainMenu, footer { visibility: hidden; }
     </style>
     """,
     unsafe_allow_html=True,
 )
 
 APP_HTML = r"""
-<div id="parallax-app">
+<div id="parallax-app-v2">
   <style>
-    #parallax-app {
-      --bg: #07111f;
-      --panel: #0b1728;
-      --panel2: #0e1d31;
-      --line: rgba(255,255,255,.16);
-      --muted: #8ea2ba;
-      --text: #e9f1fa;
-      --accent: #77d7ff;
-      --target: #ffd76a;
-      --earth: #66b7ff;
-      --sun: #ffb24d;
-      width: 100%;
-      box-sizing: border-box;
-      font-family: Inter, Pretendard, "Noto Sans KR", system-ui, sans-serif;
-      color: var(--text);
-      background: transparent;
-      user-select: none;
+    #parallax-app-v2 {
+      --bg:#050d18;
+      --panel:#071321;
+      --panel2:#09182a;
+      --border:rgba(255,255,255,.09);
+      --text:#eaf2fb;
+      --muted:#9cafc4;
+      --accent:#78d6ff;
+      --target:#ffd86a;
+      width:100%;
+      color:var(--text);
+      font-family:Inter, Pretendard, "Noto Sans KR", system-ui, sans-serif;
+      user-select:none;
     }
-
-    #parallax-app * { box-sizing: border-box; }
+    #parallax-app-v2 * { box-sizing:border-box; }
 
     .sim-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 12px;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+      gap:14px;
     }
 
     .sim-panel {
-      position: relative;
-      min-width: 0;
-      background: linear-gradient(180deg, #091526 0%, #07111f 100%);
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 18px;
-      overflow: hidden;
+      position:relative;
+      min-width:0;
+      overflow:hidden;
+      border:1px solid var(--border);
+      border-radius:18px;
+      background:linear-gradient(180deg,#071525 0%,#050d18 100%);
     }
 
     .panel-tag {
-      position: absolute;
-      top: 12px;
-      left: 14px;
-      z-index: 3;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: .02em;
-      color: rgba(233,241,250,.80);
-      padding: 5px 9px;
-      border-radius: 999px;
-      background: rgba(7,17,31,.62);
-      border: 1px solid rgba(255,255,255,.10);
-      backdrop-filter: blur(5px);
+      position:absolute;
+      top:14px;
+      left:16px;
+      z-index:2;
+      padding:5px 9px;
+      border:1px solid rgba(255,255,255,.09);
+      border-radius:999px;
+      background:rgba(5,13,24,.62);
+      color:rgba(235,243,251,.72);
+      font-size:12px;
+      font-weight:750;
+      letter-spacing:.02em;
+      backdrop-filter:blur(6px);
     }
 
     svg {
-      display: block;
-      width: 100%;
-      height: auto;
+      display:block;
+      width:100%;
+      height:auto;
     }
 
     .control-bar {
-      margin-top: 12px;
-      display: grid;
-      grid-template-columns: auto minmax(170px, 1.1fr) minmax(170px, 1fr) auto auto;
-      gap: 12px;
-      align-items: center;
-      padding: 11px 12px;
-      border-radius: 16px;
-      background: #0a1627;
-      border: 1px solid rgba(255,255,255,.10);
+      margin-top:12px;
+      display:grid;
+      grid-template-columns:auto minmax(220px,1.2fr) minmax(220px,1fr) auto auto;
+      gap:12px;
+      align-items:center;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:15px;
+      background:#081525;
     }
 
     .play-btn {
-      width: 46px;
-      height: 46px;
-      border: 0;
-      border-radius: 14px;
-      background: #162943;
-      color: #fff;
-      font-size: 20px;
-      cursor: pointer;
+      width:46px;
+      height:46px;
+      border:0;
+      border-radius:13px;
+      background:#172b46;
+      color:white;
+      font-size:19px;
+      cursor:pointer;
     }
-
-    .play-btn:hover { background: #1b3557; }
+    .play-btn:hover { background:#1d385d; }
 
     .range-group {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 9px;
-      align-items: center;
-      min-width: 0;
+      display:grid;
+      grid-template-columns:auto 1fr;
+      align-items:center;
+      gap:10px;
+      min-width:0;
     }
 
-    .range-group .mini-label {
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 700;
-      white-space: nowrap;
+    .mini-label {
+      color:var(--muted);
+      font-size:12px;
+      font-weight:750;
+      white-space:nowrap;
     }
 
     input[type="range"] {
-      width: 100%;
-      accent-color: #72cfff;
-      cursor: pointer;
+      width:100%;
+      accent-color:#72cfff;
+      cursor:pointer;
     }
 
     .toggle {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 12px;
-      font-weight: 700;
-      color: #b9c7d6;
-      white-space: nowrap;
-      cursor: pointer;
-      padding: 8px 8px;
-      border-radius: 10px;
+      display:flex;
+      align-items:center;
+      gap:7px;
+      min-height:42px;
+      padding:7px 8px;
+      border-radius:10px;
+      color:#b9c8d8;
+      font-size:12px;
+      font-weight:750;
+      white-space:nowrap;
+      cursor:pointer;
+    }
+    .toggle:hover { background:rgba(255,255,255,.035); }
+    .toggle input { accent-color:#72cfff; }
+
+    .legend-row {
+      min-height:26px;
+      padding:6px 4px 0;
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+      gap:15px;
+      color:rgba(205,220,235,.52);
+      font-size:10px;
     }
 
-    .toggle:hover { background: rgba(255,255,255,.04); }
-    .toggle input { accent-color: #72cfff; }
-
-    .legend {
-      margin-top: 7px;
-      display: flex;
-      gap: 14px;
-      align-items: center;
-      justify-content: flex-end;
-      min-height: 18px;
-      color: rgba(206,219,233,.66);
-      font-size: 10.5px;
-      padding-right: 4px;
+    .ring-key {
+      display:inline-block;
+      width:11px;
+      height:11px;
+      margin-right:4px;
+      border:1.5px solid var(--accent);
+      border-radius:50%;
+      vertical-align:-2px;
+      opacity:.8;
     }
 
-    .legend-ring {
-      display: inline-block;
-      width: 11px;
-      height: 11px;
-      border: 1.5px solid var(--accent);
-      border-radius: 50%;
-      vertical-align: -2px;
-      margin-right: 4px;
-    }
-
-    .legend-ghost {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.28);
-      vertical-align: -1px;
-      margin-right: 4px;
-    }
-
-    .note {
-      margin-top: 3px;
-      text-align: right;
-      color: rgba(206,219,233,.40);
-      font-size: 9.5px;
-      padding-right: 3px;
+    .ghost-key {
+      display:inline-block;
+      width:9px;
+      height:9px;
+      margin-right:4px;
+      border-radius:50%;
+      background:rgba(255,255,255,.24);
+      vertical-align:-1px;
     }
 
     @media (max-width: 900px) {
-      .sim-grid { grid-template-columns: 1fr; }
-      .control-bar {
-        grid-template-columns: auto 1fr;
-      }
-      .range-group { grid-column: span 1; }
-      .toggle { white-space: normal; }
+      .sim-grid { grid-template-columns:1fr; }
+      .control-bar { grid-template-columns:auto 1fr; }
+      .range-group { grid-column:span 1; }
+      .toggle { white-space:normal; }
     }
   </style>
 
   <div class="sim-grid">
     <section class="sim-panel">
       <div class="panel-tag">우주 공간</div>
-      <svg id="spaceSvg" viewBox="0 0 700 520" role="img" aria-label="태양 주위를 공전하는 지구와 거리가 다른 별들">
+      <svg id="spaceSvg" viewBox="0 0 760 760" role="img" aria-label="태양 주위를 공전하는 지구와 거리가 다른 별들">
         <defs>
-          <radialGradient id="sunGlow">
-            <stop offset="0%" stop-color="#fff2b8"/>
-            <stop offset="45%" stop-color="#ffc35b"/>
-            <stop offset="100%" stop-color="#ff8f36"/>
+          <radialGradient id="sunGlow2">
+            <stop offset="0%" stop-color="#fff8c9"/>
+            <stop offset="40%" stop-color="#ffd46e"/>
+            <stop offset="100%" stop-color="#f7963c"/>
           </radialGradient>
-          <radialGradient id="earthGlow">
-            <stop offset="0%" stop-color="#b6e3ff"/>
-            <stop offset="100%" stop-color="#4f9ee8"/>
+          <radialGradient id="earthGlow2">
+            <stop offset="0%" stop-color="#c7ebff"/>
+            <stop offset="100%" stop-color="#4f9fe9"/>
           </radialGradient>
-          <filter id="softGlow">
-            <feGaussianBlur stdDeviation="4" result="b"/>
+          <filter id="softGlow2">
+            <feGaussianBlur stdDeviation="4.5" result="b"/>
             <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
+          <linearGradient id="depthFade" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#9fb7cf" stop-opacity=".10"/>
+            <stop offset="100%" stop-color="#9fb7cf" stop-opacity="0"/>
+          </linearGradient>
         </defs>
 
-        <rect x="0" y="0" width="700" height="520" fill="#07111f"/>
-        <g id="spaceDust" opacity=".62"></g>
+        <rect width="760" height="760" fill="#050d18"/>
+        <g id="spaceDust"></g>
 
-        <g id="depthGuides" opacity=".18">
-          <path d="M350 72 L350 430" stroke="#9fb3c9" stroke-dasharray="3 8"/>
-          <path d="M135 430 C200 400 500 400 565 430" fill="none" stroke="#9fb3c9"/>
+        <g opacity=".18">
+          <path d="M380 95 L380 555" stroke="#b6c8dc" stroke-width="1" stroke-dasharray="2 9"/>
+          <path d="M110 522 C205 492 555 492 650 522" fill="none" stroke="#9fb4c8" stroke-width="1"/>
         </g>
 
-        <ellipse cx="350" cy="390" rx="220" ry="72"
-          fill="none" stroke="rgba(200,220,240,.25)" stroke-width="2"/>
+        <ellipse cx="380" cy="610" rx="250" ry="82"
+          fill="none" stroke="rgba(212,228,242,.22)" stroke-width="2"/>
 
-        <g id="sightGroup" opacity="1"></g>
+        <g id="sightGroup"></g>
 
-        <g id="sunGroup">
-          <circle cx="350" cy="390" r="27" fill="url(#sunGlow)" filter="url(#softGlow)"/>
-          <circle cx="350" cy="390" r="5" fill="#fff8d8"/>
+        <g>
+          <circle cx="380" cy="610" r="30" fill="url(#sunGlow2)" filter="url(#softGlow2)"/>
+          <circle cx="380" cy="610" r="6" fill="#fffce2"/>
         </g>
 
         <g id="earthOpposite"></g>
         <g id="earthCurrent"></g>
-
         <g id="starLayer"></g>
       </svg>
     </section>
 
     <section class="sim-panel">
       <div class="panel-tag">지구에서 본 하늘</div>
-      <svg id="skySvg" viewBox="0 0 700 520" role="img" aria-label="지구의 위치에 따라 별의 겉보기 위치가 달라지는 밤하늘">
+      <svg id="skySvg" viewBox="0 0 760 760" role="img" aria-label="지구의 위치에 따라 달라지는 별의 겉보기 위치">
         <defs>
-          <filter id="skyGlow">
-            <feGaussianBlur stdDeviation="3.5" result="b"/>
+          <filter id="skyGlow2">
+            <feGaussianBlur stdDeviation="4" result="b"/>
             <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
         </defs>
-        <rect x="0" y="0" width="700" height="520" fill="#050d19"/>
+        <rect width="760" height="760" fill="#040b15"/>
         <g id="skyDust"></g>
+        <g id="skyPaths"></g>
         <g id="skyGhosts"></g>
         <g id="skyStars"></g>
       </svg>
@@ -272,7 +256,7 @@ APP_HTML = r"""
 
     <label class="range-group">
       <span class="mini-label">별 거리</span>
-      <input id="distanceRange" type="range" min="35" max="850" step="1" value="95" aria-label="관측 별 거리">
+      <input id="distanceRange" type="range" min="120" max="1600" step="1" value="280" aria-label="관측 별 거리">
     </label>
 
     <label class="toggle">
@@ -286,27 +270,25 @@ APP_HTML = r"""
     </label>
   </div>
 
-  <div class="legend">
-    <span><span class="legend-ring"></span>기준 가능</span>
-    <span><span class="legend-ghost"></span>6개월 전</span>
+  <div class="legend-row">
+    <span><span class="ring-key"></span>배경 기준 가능</span>
+    <span><span class="ghost-key"></span>6개월 전 위치</span>
   </div>
-  <div class="note">거리와 시차는 수업용으로 과장하여 표시</div>
 
   <script>
     (() => {
-      const root = document.getElementById("parallax-app");
+      const root = document.getElementById("parallax-app-v2");
       if (!root || root.dataset.ready === "1") return;
       root.dataset.ready = "1";
 
       const NS = "http://www.w3.org/2000/svg";
-      const spaceSvg = root.querySelector("#spaceSvg");
-      const skySvg = root.querySelector("#skySvg");
       const starLayer = root.querySelector("#starLayer");
       const sightGroup = root.querySelector("#sightGroup");
       const earthCurrent = root.querySelector("#earthCurrent");
       const earthOpposite = root.querySelector("#earthOpposite");
       const skyStars = root.querySelector("#skyStars");
       const skyGhosts = root.querySelector("#skyGhosts");
+      const skyPaths = root.querySelector("#skyPaths");
       const orbitRange = root.querySelector("#orbitRange");
       const distanceRange = root.querySelector("#distanceRange");
       const farParallax = root.querySelector("#farParallax");
@@ -314,227 +296,217 @@ APP_HTML = r"""
       const playBtn = root.querySelector("#playBtn");
 
       const BG_STARS = [
-        { id: "A", distance: 135, baseX: 118, baseY: 152, size: 5.2 },
-        { id: "B", distance: 255, baseX: 535, baseY: 112, size: 4.5 },
-        { id: "C", distance: 510, baseX: 195, baseY: 352, size: 4.1 },
-        { id: "D", distance: 1100, baseX: 560, baseY: 338, size: 3.8 }
+        { distance: 650,  baseX: 150, baseY: 190, size: 5.0, spaceX: 185 },
+        { distance: 1100, baseX: 590, baseY: 145, size: 4.6, spaceX: 590 },
+        { distance: 2200, baseX: 245, baseY: 420, size: 4.1, spaceX: 260 },
+        { distance: 4500, baseX: 575, baseY: 390, size: 3.8, spaceX: 525 },
       ];
 
-      const targetBase = { id: "★", baseX: 354, baseY: 242, size: 8.4 };
+      const TARGET_BASE = { baseX: 382, baseY: 305, size: 9.3 };
 
       let playing = false;
       let raf = null;
       let lastT = null;
-      let theta = Number(orbitRange.value) * Math.PI / 180;
 
-      function el(name, attrs = {}, parent = null) {
-        const node = document.createElementNS(NS, name);
-        for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, String(v));
-        if (parent) parent.appendChild(node);
-        return node;
+      function el(name, attrs={}, parent=null) {
+        const n = document.createElementNS(NS, name);
+        for (const [k,v] of Object.entries(attrs)) n.setAttribute(k, String(v));
+        if (parent) parent.appendChild(n);
+        return n;
       }
 
       function clear(node) {
         while (node.firstChild) node.removeChild(node.firstChild);
       }
 
-      function seededRandom(seed) {
-        let x = Math.sin(seed * 999.91) * 43758.5453;
+      function seeded(seed) {
+        const x = Math.sin(seed * 912.73) * 43758.5453;
         return x - Math.floor(x);
       }
 
-      function drawDust(group, count, w, h, seedBase, minR, maxR) {
+      function drawDust(group, count, width, height, seedBase, rMin, rMax, opacityScale=1) {
         clear(group);
-        for (let i = 0; i < count; i++) {
-          const x = seededRandom(seedBase + i * 3.11) * w;
-          const y = seededRandom(seedBase + i * 7.47) * h;
-          const r = minR + seededRandom(seedBase + i * 11.93) * (maxR - minR);
-          const op = .18 + seededRandom(seedBase + i * 5.17) * .58;
-          el("circle", { cx: x, cy: y, r, fill: "#dcecff", opacity: op }, group);
+        for (let i=0;i<count;i++) {
+          const x = seeded(seedBase + i*2.71) * width;
+          const y = seeded(seedBase + i*7.19) * height;
+          const r = rMin + seeded(seedBase + i*11.31) * (rMax-rMin);
+          const op = (.13 + seeded(seedBase + i*5.83)*.48) * opacityScale;
+          el("circle", {cx:x,cy:y,r,fill:"#deedff",opacity:op}, group);
         }
       }
 
-      drawDust(root.querySelector("#spaceDust"), 52, 700, 520, 20, .45, 1.5);
-      drawDust(root.querySelector("#skyDust"), 92, 700, 520, 80, .45, 1.8);
+      drawDust(root.querySelector("#spaceDust"), 72, 760, 760, 21, .4, 1.45, .9);
+      drawDust(root.querySelector("#skyDust"), 125, 760, 760, 83, .45, 1.75, 1);
 
       function earthPos(angle) {
         return {
-          x: 350 + 220 * Math.cos(angle),
-          y: 390 + 72 * Math.sin(angle)
+          x: 380 + 250*Math.cos(angle),
+          y: 610 + 82*Math.sin(angle)
         };
       }
 
       function distanceToSpaceY(d) {
-        const minD = 35, maxD = 1100;
-        const t = (Math.log(d) - Math.log(minD)) / (Math.log(maxD) - Math.log(minD));
-        return 315 - Math.max(0, Math.min(1, t)) * 225;
+        const minD = 120;
+        const maxD = 4500;
+        const t = Math.max(0, Math.min(1,
+          (Math.log(d)-Math.log(minD)) / (Math.log(maxD)-Math.log(minD))
+        ));
+        return 405 - t*315;
       }
 
-      function distanceToSpaceX(d, index) {
-        const spread = [265, 440, 230, 485][index] ?? 350;
-        return spread;
-      }
-
-      function drawEarth(group, pos, ghost=false) {
+      function drawEarth(group, p, ghost=false) {
         clear(group);
-        const opacity = ghost ? .26 : 1;
-        el("circle", {
-          cx: pos.x, cy: pos.y, r: ghost ? 10 : 13,
-          fill: "url(#earthGlow)", opacity
-        }, group);
-        if (!ghost) {
-          el("circle", {
-            cx: pos.x - 3, cy: pos.y - 2, r: 2.5,
-            fill: "#d8f4ff", opacity: .85
-          }, group);
+        if (ghost) {
+          el("circle", {cx:p.x,cy:p.y,r:10.5,fill:"#7bc2ff",opacity:.22}, group);
+          return;
         }
+        el("circle", {cx:p.x,cy:p.y,r:14,fill:"url(#earthGlow2)"}, group);
+        el("circle", {cx:p.x-3.5,cy:p.y-2.2,r:2.7,fill:"#e2f5ff",opacity:.9}, group);
       }
 
-      function starSymbol(parent, x, y, r, fill, opacity=1, glow=false) {
-        const g = el("g", { opacity }, parent);
+      function starShape(parent,x,y,r,fill,opacity=1,glow=false,filterId="softGlow2") {
+        const g = el("g",{opacity},parent);
         if (glow) {
-          el("circle", { cx:x, cy:y, r:r*1.9, fill, opacity:.12, filter:"url(#softGlow)" }, g);
+          el("circle",{cx:x,cy:y,r:r*2.25,fill,opacity:.12,filter:`url(#${filterId})`},g);
         }
-        const pts = [];
-        for (let i=0;i<10;i++) {
-          const a = -Math.PI/2 + i*Math.PI/5;
-          const rr = i%2===0 ? r : r*0.42;
-          pts.push(`${x + rr*Math.cos(a)},${y + rr*Math.sin(a)}`);
+        const pts=[];
+        for(let i=0;i<10;i++){
+          const a=-Math.PI/2+i*Math.PI/5;
+          const rr=i%2===0?r:r*.42;
+          pts.push(`${x+rr*Math.cos(a)},${y+rr*Math.sin(a)}`);
         }
-        el("polygon", { points: pts.join(" "), fill }, g);
+        el("polygon",{points:pts.join(" "),fill},g);
         return g;
       }
 
-      function skyPosition(star, angle, useParallax=true) {
-        const d = star.distance;
-        const amp = 1600 / d;
-        const px = useParallax ? amp * Math.cos(angle) : 0;
-        const py = useParallax ? amp * .32 * Math.sin(angle) : 0;
+      function skyPos(star, angle, apply=true) {
+        if (!apply) return {x:star.baseX,y:star.baseY};
+        const amp = 15000 / star.distance;
         return {
-          x: star.baseX - px,
-          y: star.baseY - py
+          x: star.baseX - amp*Math.cos(angle),
+          y: star.baseY - amp*.27*Math.sin(angle)
         };
       }
 
+      function parallaxPath(star, parent, opacity, stroke) {
+        const rx = 15000/star.distance;
+        const ry = rx*.27;
+        el("ellipse", {
+          cx:star.baseX, cy:star.baseY,
+          rx, ry,
+          fill:"none",
+          stroke,
+          "stroke-width":1,
+          "stroke-dasharray":"3 6",
+          opacity
+        }, parent);
+      }
+
       function render() {
-        theta = Number(orbitRange.value) * Math.PI / 180;
+        const theta = Number(orbitRange.value)*Math.PI/180;
         const targetDistance = Number(distanceRange.value);
+        const nowEarth = earthPos(theta);
+        const oppositeEarth = earthPos(theta+Math.PI);
 
-        const eNow = earthPos(theta);
-        const eOpp = earthPos(theta + Math.PI);
-        drawEarth(earthCurrent, eNow, false);
-        drawEarth(earthOpposite, eOpp, true);
+        drawEarth(earthCurrent, nowEarth, false);
+        drawEarth(earthOpposite, oppositeEarth, true);
 
-        // LEFT: physical space
         clear(starLayer);
         clear(sightGroup);
+        clear(skyStars);
+        clear(skyGhosts);
+        clear(skyPaths);
 
         const targetSpace = {
-          x: 350,
-          y: distanceToSpaceY(targetDistance)
+          x:380,
+          y:distanceToSpaceY(targetDistance)
         };
 
-        // subtle Sun-target axis
-        el("line", {
-          x1:350, y1:365, x2:targetSpace.x, y2:targetSpace.y + 10,
-          stroke:"#cbd9e8", "stroke-width":1,
-          "stroke-dasharray":"2 7", opacity:.13
-        }, starLayer);
-
-        // background/reference stars
-        BG_STARS.forEach((s, i) => {
-          const x = distanceToSpaceX(s.distance, i);
+        // depth layers: stars are all physically separate points
+        BG_STARS.forEach((s) => {
           const y = distanceToSpaceY(s.distance);
-          const eligible = s.distance > targetDistance;
+          const eligible = s.distance >= targetDistance*1.8;
 
           if (eligible) {
             el("circle", {
-              cx:x, cy:y, r:11,
-              fill:"none", stroke:"#77d7ff",
-              "stroke-width":1.5, opacity:.72
+              cx:s.spaceX, cy:y, r:12.5,
+              fill:"none",
+              stroke:"#78d6ff",
+              "stroke-width":1.3,
+              opacity:.46
             }, starLayer);
           }
-          starSymbol(starLayer, x, y, 5.4, "#eaf3ff", .96, false);
-          el("text", {
-            x:x+10, y:y+4, fill:"#b6c7d8",
-            "font-size":"10", "font-weight":"700", opacity:.62
-          }, starLayer).textContent = s.id;
+
+          starShape(starLayer,s.spaceX,y,5.5,"#edf6ff",.95,false);
         });
 
-        // target star
-        starSymbol(starLayer, targetSpace.x, targetSpace.y, 9.2, "#ffd76a", 1, true);
+        starShape(starLayer,targetSpace.x,targetSpace.y,10.2,"#ffd86a",1,true);
 
         if (sightToggle.checked) {
-          // current and opposite 6-month sight lines to same target star
           el("line", {
-            x1:eNow.x, y1:eNow.y, x2:targetSpace.x, y2:targetSpace.y,
-            stroke:"#ffd76a", "stroke-width":1.6, opacity:.72
+            x1:nowEarth.x,y1:nowEarth.y,
+            x2:targetSpace.x,y2:targetSpace.y,
+            stroke:"#ffd86a",
+            "stroke-width":1.6,
+            opacity:.68
           }, sightGroup);
+
           el("line", {
-            x1:eOpp.x, y1:eOpp.y, x2:targetSpace.x, y2:targetSpace.y,
-            stroke:"#ffffff", "stroke-width":1.2,
-            "stroke-dasharray":"4 5", opacity:.28
+            x1:oppositeEarth.x,y1:oppositeEarth.y,
+            x2:targetSpace.x,y2:targetSpace.y,
+            stroke:"#f4f8fb",
+            "stroke-width":1.1,
+            "stroke-dasharray":"4 6",
+            opacity:.22
           }, sightGroup);
         }
 
-        // RIGHT: apparent sky
-        clear(skyStars);
-        clear(skyGhosts);
-
+        // apparent sky
         const targetStar = {
-          ...targetBase,
-          distance: targetDistance
+          distance:targetDistance,
+          baseX:TARGET_BASE.baseX,
+          baseY:TARGET_BASE.baseY,
+          size:TARGET_BASE.size
         };
 
-        const targetNow = skyPosition(targetStar, theta, true);
-        const targetOpp = skyPosition(targetStar, theta + Math.PI, true);
+        parallaxPath(targetStar, skyPaths, .17, "#ffd86a");
 
-        // target 6-month ghost
+        const targetNow = skyPos(targetStar,theta,true);
+        const targetOpp = skyPos(targetStar,theta+Math.PI,true);
+
         el("circle", {
-          cx:targetOpp.x, cy:targetOpp.y, r:5.8,
-          fill:"#ffd76a", opacity:.24
-        }, skyGhosts);
-        el("line", {
-          x1:targetOpp.x, y1:targetOpp.y, x2:targetNow.x, y2:targetNow.y,
-          stroke:"#ffd76a", "stroke-width":1,
-          "stroke-dasharray":"3 5", opacity:.24
+          cx:targetOpp.x,cy:targetOpp.y,r:5.8,
+          fill:"#ffd86a",opacity:.22
         }, skyGhosts);
 
         BG_STARS.forEach((s) => {
-          const useRealParallax = farParallax.checked;
-          const now = skyPosition(s, theta, useRealParallax);
-          const opp = skyPosition(s, theta + Math.PI, useRealParallax);
-          const eligible = s.distance > targetDistance;
+          const apply = farParallax.checked;
+          const now = skyPos(s,theta,apply);
+          const opp = skyPos(s,theta+Math.PI,apply);
+          const eligible = s.distance >= targetDistance*1.8;
 
           if (farParallax.checked) {
+            parallaxPath(s, skyPaths, .08, "#d7e9f8");
             el("circle", {
-              cx:opp.x, cy:opp.y, r:3.3,
-              fill:"#ffffff", opacity:.16
-            }, skyGhosts);
-            el("line", {
-              x1:opp.x, y1:opp.y, x2:now.x, y2:now.y,
-              stroke:"#dfeeff", "stroke-width":.8,
-              "stroke-dasharray":"2 4", opacity:.13
+              cx:opp.x,cy:opp.y,r:3,
+              fill:"#ffffff",opacity:.13
             }, skyGhosts);
           }
 
           if (eligible) {
             el("circle", {
-              cx:now.x, cy:now.y, r:10.5,
-              fill:"none", stroke:"#77d7ff",
-              "stroke-width":1.3, opacity:.68
+              cx:now.x,cy:now.y,r:11.3,
+              fill:"none",
+              stroke:"#78d6ff",
+              "stroke-width":1.2,
+              opacity:.42
             }, skyStars);
           }
 
-          starSymbol(skyStars, now.x, now.y, s.size, "#edf6ff", .96, false);
-          el("text", {
-            x:now.x+10, y:now.y+3,
-            fill:"#b7c8d9", "font-size":"10", "font-weight":"700",
-            opacity:.60
-          }, skyStars).textContent = s.id;
+          starShape(skyStars,now.x,now.y,s.size,"#eef7ff",.96,false,"skyGlow2");
         });
 
-        starSymbol(skyStars, targetNow.x, targetNow.y, targetBase.size, "#ffd76a", 1, true);
+        starShape(skyStars,targetNow.x,targetNow.y,TARGET_BASE.size,"#ffd86a",1,true,"skyGlow2");
       }
 
       function setPlaying(next) {
@@ -552,26 +524,27 @@ APP_HTML = r"""
 
       function tick(t) {
         if (!playing) return;
-        const dt = Math.min(50, t - lastT);
-        lastT = t;
-        let deg = Number(orbitRange.value);
-        deg = (deg + dt * 0.012) % 360; // 약 30초에 한 바퀴
-        orbitRange.value = String(deg);
+        const dt = Math.min(50,t-lastT);
+        lastT=t;
+        let deg=Number(orbitRange.value);
+        deg=(deg+dt*.0105)%360;
+        orbitRange.value=String(deg);
         render();
-        raf = requestAnimationFrame(tick);
+        raf=requestAnimationFrame(tick);
       }
 
-      playBtn.addEventListener("click", () => setPlaying(!playing));
-      orbitRange.addEventListener("input", () => {
-        if (playing) setPlaying(false);
+      playBtn.addEventListener("click",()=>setPlaying(!playing));
+      orbitRange.addEventListener("input",()=>{
+        if(playing) setPlaying(false);
         render();
       });
-      distanceRange.addEventListener("input", render);
-      farParallax.addEventListener("change", render);
-      sightToggle.addEventListener("change", render);
+      distanceRange.addEventListener("input",render);
+      farParallax.addEventListener("change",render);
+      sightToggle.addEventListener("change",render);
 
-      const mq = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
-      if (mq && mq.matches) setPlaying(false);
+      if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        setPlaying(false);
+      }
 
       render();
     })();
@@ -579,4 +552,4 @@ APP_HTML = r"""
 </div>
 """
 
-components.html(APP_HTML, height=820, scrolling=False)
+components.html(APP_HTML, height=1040, scrolling=False)
