@@ -12,8 +12,8 @@ st.markdown(
     """
     <style>
         .block-container {
-            padding-top: 0.25rem;
-            padding-bottom: 0.4rem;
+            padding-top: 1.15rem;
+            padding-bottom: 0.5rem;
             max-width: 1580px;
         }
         header[data-testid="stHeader"] { height: 0; }
@@ -24,80 +24,75 @@ st.markdown(
 )
 
 APP_HTML = r"""
-<div id="parallax-app-v3">
+<div id="parallax-app-v4">
   <style>
-    #parallax-app-v3 {
-      --bg:#050d18;
-      --border:rgba(255,255,255,.09);
-      --text:#eaf2fb;
-      --muted:#9cafc4;
-      --accent:#78d6ff;
-      --target:#ffd86a;
-      width:100%;
-      color:var(--text);
-      font-family:Inter, Pretendard, "Noto Sans KR", system-ui, sans-serif;
-      user-select:none;
+    #parallax-app-v4 {
+      --border: rgba(255,255,255,.09);
+      --text: #eaf2fb;
+      --muted: #9cafc4;
+      --accent: #78d6ff;
+      --target: #ffd86a;
+      width: 100%;
+      color: var(--text);
+      font-family: Inter, Pretendard, "Noto Sans KR", system-ui, sans-serif;
+      user-select: none;
+      padding-top: 6px;
     }
-    #parallax-app-v3 * { box-sizing:border-box; }
+    #parallax-app-v4 * { box-sizing: border-box; }
 
     .sim-grid {
-      display:grid;
-      grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-      gap:14px;
+      display: grid;
+      grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+      gap: 14px;
     }
 
     .sim-panel {
-      position:relative;
-      min-width:0;
-      overflow:hidden;
-      border:1px solid var(--border);
-      border-radius:18px;
-      background:linear-gradient(180deg,#071525 0%,#050d18 100%);
+      position: relative;
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(180deg,#071525 0%,#050d18 100%);
     }
 
     .panel-tag {
-      position:absolute;
-      top:14px;
-      left:16px;
-      z-index:2;
-      padding:5px 9px;
-      border:1px solid rgba(255,255,255,.09);
-      border-radius:999px;
-      background:rgba(5,13,24,.62);
-      color:rgba(235,243,251,.72);
-      font-size:12px;
-      font-weight:750;
-      letter-spacing:.02em;
-      backdrop-filter:blur(6px);
+      position: absolute;
+      top: 18px;
+      left: 16px;
+      z-index: 2;
+      padding: 5px 9px;
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 999px;
+      background: rgba(5,13,24,.62);
+      color: rgba(235,243,251,.72);
+      font-size: 12px;
+      font-weight: 750;
+      backdrop-filter: blur(6px);
     }
 
-    svg {
-      display:block;
-      width:100%;
-      height:auto;
-    }
+    svg { display:block; width:100%; height:auto; }
 
     .control-bar {
-      margin-top:12px;
-      display:grid;
-      grid-template-columns:auto minmax(220px,1.2fr) minmax(220px,1fr) auto auto;
-      gap:12px;
-      align-items:center;
-      padding:10px 12px;
-      border:1px solid var(--border);
-      border-radius:15px;
-      background:#081525;
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: auto minmax(220px,1.2fr) minmax(220px,1fr) auto auto;
+      gap: 12px;
+      align-items: center;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: #081525;
     }
 
     .play-btn {
-      width:46px;
-      height:46px;
-      border:0;
-      border-radius:13px;
-      background:#172b46;
-      color:white;
-      font-size:19px;
-      cursor:pointer;
+      width: 46px;
+      height: 46px;
+      border: 0;
+      border-radius: 13px;
+      background: #172b46;
+      color: white;
+      font-size: 19px;
+      cursor: pointer;
     }
     .play-btn:hover { background:#1d385d; }
 
@@ -170,10 +165,9 @@ APP_HTML = r"""
       vertical-align:-1px;
     }
 
-    @media (max-width: 900px) {
+    @media (max-width:900px) {
       .sim-grid { grid-template-columns:1fr; }
       .control-bar { grid-template-columns:auto 1fr; }
-      .range-group { grid-column:span 1; }
       .toggle { white-space:normal; }
     }
   </style>
@@ -181,38 +175,48 @@ APP_HTML = r"""
   <div class="sim-grid">
     <section class="sim-panel">
       <div class="panel-tag">우주 공간</div>
-      <svg id="spaceSvg" viewBox="0 0 760 760" role="img" aria-label="태양 주위를 공전하는 지구와 거리가 다른 별들">
+
+      <svg id="spaceSvg" viewBox="0 0 760 820" role="img"
+           aria-label="태양 주위를 공전하는 지구와 연주시차의 기하학적 구조">
         <defs>
-          <radialGradient id="sunGlow3">
+          <radialGradient id="sunGlow4">
             <stop offset="0%" stop-color="#fff8c9"/>
             <stop offset="40%" stop-color="#ffd46e"/>
             <stop offset="100%" stop-color="#f7963c"/>
           </radialGradient>
-          <radialGradient id="earthGlow3">
+          <radialGradient id="earthGlow4">
             <stop offset="0%" stop-color="#c7ebff"/>
             <stop offset="100%" stop-color="#4f9fe9"/>
           </radialGradient>
-          <filter id="softGlow3">
+          <filter id="softGlow4">
             <feGaussianBlur stdDeviation="4.5" result="b"/>
-            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            <feMerge>
+              <feMergeNode in="b"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
           </filter>
         </defs>
 
-        <rect width="760" height="760" fill="#050d18"/>
+        <rect width="760" height="820" fill="#050d18"/>
         <g id="spaceDust"></g>
 
-        <!-- 먼 별들이 놓인 하나의 배경 기준선 -->
-        <line x1="88" y1="105" x2="672" y2="105"
-          stroke="#b6c8dc" stroke-width="1.2" opacity=".16"/>
+        <!-- 왼쪽 상단: 같은 겉보기 위치를 원형 궤적으로 재표현 -->
+        <g id="leftSkyInset"></g>
 
-        <ellipse cx="380" cy="610" rx="250" ry="82"
-          fill="none" stroke="rgba(212,228,242,.22)" stroke-width="2"/>
+        <!-- 먼 배경별들이 놓인 기준선 -->
+        <line id="backgroundLineSpace"
+              x1="82" y1="190" x2="678" y2="190"
+              stroke="#bdd0e1" stroke-width="1.2" opacity=".15"/>
+
+        <ellipse cx="380" cy="680" rx="250" ry="82"
+                 fill="none" stroke="rgba(212,228,242,.22)" stroke-width="2"/>
 
         <g id="sightGroup"></g>
 
         <g>
-          <circle cx="380" cy="610" r="30" fill="url(#sunGlow3)" filter="url(#softGlow3)"/>
-          <circle cx="380" cy="610" r="6" fill="#fffce2"/>
+          <circle cx="380" cy="680" r="30"
+                  fill="url(#sunGlow4)" filter="url(#softGlow4)"/>
+          <circle cx="380" cy="680" r="6" fill="#fffce2"/>
         </g>
 
         <g id="earthOpposite"></g>
@@ -223,19 +227,24 @@ APP_HTML = r"""
 
     <section class="sim-panel">
       <div class="panel-tag">지구에서 본 하늘</div>
-      <svg id="skySvg" viewBox="0 0 760 760" role="img" aria-label="지구의 위치에 따라 달라지는 별의 겉보기 위치">
+
+      <svg id="skySvg" viewBox="0 0 760 820" role="img"
+           aria-label="지구의 위치에 따라 달라지는 별의 겉보기 위치">
         <defs>
-          <filter id="skyGlow3">
+          <filter id="skyGlow4">
             <feGaussianBlur stdDeviation="4" result="b"/>
-            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            <feMerge>
+              <feMergeNode in="b"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
           </filter>
         </defs>
-        <rect width="760" height="760" fill="#040b15"/>
+
+        <rect width="760" height="820" fill="#040b15"/>
         <g id="skyDust"></g>
 
-        <!-- 겉보기 하늘에서도 배경별들을 같은 기준선에 놓음 -->
-        <line x1="92" y1="350" x2="668" y2="350"
-          stroke="#c6d7e8" stroke-width="1" opacity=".10"/>
+        <line x1="92" y1="420" x2="668" y2="420"
+              stroke="#c6d7e8" stroke-width="1" opacity=".10"/>
 
         <g id="skyPaths"></g>
         <g id="skyGhosts"></g>
@@ -249,12 +258,14 @@ APP_HTML = r"""
 
     <label class="range-group">
       <span class="mini-label">공전</span>
-      <input id="orbitRange" type="range" min="0" max="360" step="0.2" value="205" aria-label="지구 공전 위치">
+      <input id="orbitRange" type="range" min="0" max="360" step="0.2" value="205"
+             aria-label="지구 공전 위치">
     </label>
 
     <label class="range-group">
       <span class="mini-label">별 거리</span>
-      <input id="distanceRange" type="range" min="140" max="1600" step="1" value="320" aria-label="관측 별 거리">
+      <input id="distanceRange" type="range" min="140" max="1600" step="1" value="320"
+             aria-label="관측 별 거리">
     </label>
 
     <label class="toggle">
@@ -275,36 +286,45 @@ APP_HTML = r"""
 
   <script>
     (() => {
-      const root = document.getElementById("parallax-app-v3");
+      const root = document.getElementById("parallax-app-v4");
       if (!root || root.dataset.ready === "1") return;
       root.dataset.ready = "1";
 
       const NS = "http://www.w3.org/2000/svg";
+
       const starLayer = root.querySelector("#starLayer");
       const sightGroup = root.querySelector("#sightGroup");
       const earthCurrent = root.querySelector("#earthCurrent");
       const earthOpposite = root.querySelector("#earthOpposite");
+      const leftSkyInset = root.querySelector("#leftSkyInset");
+
       const skyStars = root.querySelector("#skyStars");
       const skyGhosts = root.querySelector("#skyGhosts");
       const skyPaths = root.querySelector("#skyPaths");
+
       const orbitRange = root.querySelector("#orbitRange");
       const distanceRange = root.querySelector("#distanceRange");
       const farParallax = root.querySelector("#farParallax");
       const sightToggle = root.querySelector("#sightToggle");
       const playBtn = root.querySelector("#playBtn");
 
-      const BACKGROUND_Y_SPACE = 105;
-      const BACKGROUND_Y_SKY = 350;
-      const BACKGROUND_DISTANCE = 4200;
+      const CX = 380;
+      const ORBIT_CY = 680;
+      const ORBIT_RX = 250;
+      const ORBIT_RY = 82;
+
+      const BG_Y_SPACE = 190;
+      const BG_Y_SKY = 420;
+
+      const SKY_SCALE = 0.42;
+      const INSET_SCALE = 0.23;
 
       const BG_STARS = [
-        { distance: BACKGROUND_DISTANCE, baseX: 150, baseY: BACKGROUND_Y_SKY, size: 4.6, spaceX: 150 },
-        { distance: BACKGROUND_DISTANCE, baseX: 270, baseY: BACKGROUND_Y_SKY, size: 5.2, spaceX: 270 },
-        { distance: BACKGROUND_DISTANCE, baseX: 490, baseY: BACKGROUND_Y_SKY, size: 4.8, spaceX: 490 },
-        { distance: BACKGROUND_DISTANCE, baseX: 610, baseY: BACKGROUND_Y_SKY, size: 4.2, spaceX: 610 },
+        { baseX:150, size:4.6 },
+        { baseX:270, size:5.2 },
+        { baseX:490, size:4.8 },
+        { baseX:610, size:4.2 }
       ];
-
-      const TARGET_BASE = { baseX: 380, baseY: BACKGROUND_Y_SKY, size: 9.3 };
 
       let playing = false;
       let raf = null;
@@ -337,13 +357,13 @@ APP_HTML = r"""
         }
       }
 
-      drawDust(root.querySelector("#spaceDust"), 72, 760, 760, 21, .4, 1.45, .9);
-      drawDust(root.querySelector("#skyDust"), 125, 760, 760, 83, .45, 1.75, 1);
+      drawDust(root.querySelector("#spaceDust"), 78, 760, 820, 21, .4, 1.45, .9);
+      drawDust(root.querySelector("#skyDust"), 135, 760, 820, 83, .45, 1.75, 1);
 
       function earthPos(angle) {
         return {
-          x: 380 + 250*Math.cos(angle),
-          y: 610 + 82*Math.sin(angle)
+          x: CX + ORBIT_RX*Math.cos(angle),
+          y: ORBIT_CY + ORBIT_RY*Math.sin(angle)
         };
       }
 
@@ -351,72 +371,111 @@ APP_HTML = r"""
         const minD = 140;
         const maxD = 1600;
         const t = Math.max(0, Math.min(1, (distance-minD)/(maxD-minD)));
-        return 410 - t*175;
+        return 455 - t*185;
       }
 
       function drawEarth(group, p, ghost=false) {
         clear(group);
         if (ghost) {
-          el("circle", {cx:p.x,cy:p.y,r:10.5,fill:"#7bc2ff",opacity:.22}, group);
+          el("circle", {
+            cx:p.x, cy:p.y, r:10.5,
+            fill:"#7bc2ff", opacity:.22
+          }, group);
           return;
         }
-        el("circle", {cx:p.x,cy:p.y,r:14,fill:"url(#earthGlow3)"}, group);
-        el("circle", {cx:p.x-3.5,cy:p.y-2.2,r:2.7,fill:"#e2f5ff",opacity:.9}, group);
+
+        el("circle", {
+          cx:p.x, cy:p.y, r:14,
+          fill:"url(#earthGlow4)"
+        }, group);
+
+        el("circle", {
+          cx:p.x-3.5, cy:p.y-2.2, r:2.7,
+          fill:"#e2f5ff", opacity:.9
+        }, group);
       }
 
-      function starShape(parent,x,y,r,fill,opacity=1,glow=false,filterId="softGlow3") {
+      function starShape(parent,x,y,r,fill,opacity=1,glow=false,filterId="softGlow4") {
         const g = el("g",{opacity},parent);
+
         if (glow) {
-          el("circle",{cx:x,cy:y,r:r*2.25,fill,opacity:.12,filter:`url(#${filterId})`},g);
+          el("circle", {
+            cx:x, cy:y, r:r*2.25,
+            fill, opacity:.12,
+            filter:`url(#${filterId})`
+          }, g);
         }
+
         const pts=[];
         for(let i=0;i<10;i++){
           const a=-Math.PI/2+i*Math.PI/5;
           const rr=i%2===0?r:r*.42;
           pts.push(`${x+rr*Math.cos(a)},${y+rr*Math.sin(a)}`);
         }
+
         el("polygon",{points:pts.join(" "),fill},g);
         return g;
       }
 
-      // 오른쪽 화면의 연주시차는 원형 궤적으로 표현
-      function skyPos(star, angle, apply=true) {
-        if (!apply) return {x:star.baseX,y:star.baseY};
-        const amp = 15000 / star.distance;
+      // 왼쪽 주 시선의 실제 기하:
+      // 지구 -> 주인공 별 직선을 먼 배경 기준선까지 정확히 연장한다.
+      function sightIntersection(earth, target) {
+        const dy = target.y - earth.y;
+        if (Math.abs(dy) < 0.0001) {
+          return { x: target.x, y: BG_Y_SPACE };
+        }
+
+        const t = (BG_Y_SPACE - earth.y) / dy;
+
         return {
-          x: star.baseX - amp*Math.cos(angle),
-          y: star.baseY - amp*Math.sin(angle)
+          x: earth.x + t*(target.x-earth.x),
+          y: BG_Y_SPACE
         };
       }
 
-      function parallaxCircle(star, parent, opacity, stroke) {
-        const r = 15000/star.distance;
+      // 특정 거리에서 시선 교점이 움직일 수 있는 최대 좌우 폭을 실제 왼쪽 기하로 계산
+      function intersectionRadius(target) {
+        let maxAbs = 1;
+
+        for (let i=0;i<720;i++) {
+          const a = i/720*Math.PI*2;
+          const e = earthPos(a);
+          const p = sightIntersection(e,target);
+          maxAbs = Math.max(maxAbs, Math.abs(p.x-CX));
+        }
+
+        return maxAbs;
+      }
+
+      // 핵심:
+      // 오른쪽 별 위치의 x는 왼쪽 시선-배경선 교점에서 직접 가져온다.
+      // y는 같은 반지름 위에서 계산해 정확한 원을 만든다.
+      function circularApparentVector(theta, intersectionX, radius) {
+        const rawX = intersectionX-CX;
+        const x = Math.max(-radius, Math.min(radius, rawX));
+        const yMag = Math.sqrt(Math.max(0, radius*radius-x*x));
+
+        let sign = -Math.sign(Math.sin(theta));
+        if (sign === 0) sign = -1;
+
+        return { x, y: sign*yMag };
+      }
+
+      function drawCirclePath(parent,cx,cy,r,stroke,opacity,dash="3 6") {
         el("circle", {
-          cx:star.baseX,
-          cy:star.baseY,
-          r,
+          cx, cy, r,
           fill:"none",
           stroke,
           "stroke-width":1,
-          "stroke-dasharray":"3 6",
+          "stroke-dasharray":dash,
           opacity
         }, parent);
-      }
-
-      // 지구 -> 주인공 별을 지난 시선을 배경별 기준선까지 연장
-      function extendedSightEnd(earth, target) {
-        const dy = target.y - earth.y;
-        if (Math.abs(dy) < 0.001) return {x:target.x, y:BACKGROUND_Y_SPACE};
-        const t = (BACKGROUND_Y_SPACE - earth.y) / dy;
-        return {
-          x: earth.x + t*(target.x-earth.x),
-          y: BACKGROUND_Y_SPACE
-        };
       }
 
       function render() {
         const theta = Number(orbitRange.value)*Math.PI/180;
         const targetDistance = Number(distanceRange.value);
+
         const nowEarth = earthPos(theta);
         const oppositeEarth = earthPos(theta+Math.PI);
 
@@ -425,111 +484,234 @@ APP_HTML = r"""
 
         clear(starLayer);
         clear(sightGroup);
+        clear(leftSkyInset);
         clear(skyStars);
         clear(skyGhosts);
         clear(skyPaths);
 
         const targetSpace = {
-          x:380,
-          y:targetSpaceY(targetDistance)
+          x: CX,
+          y: targetSpaceY(targetDistance)
         };
 
-        // 배경별: 동일한 먼 거리, 동일한 직선상
+        // 배경별: 실제 우주 화면에서는 한 직선상
         BG_STARS.forEach((s) => {
           el("circle", {
-            cx:s.spaceX, cy:BACKGROUND_Y_SPACE, r:11.2,
+            cx:s.baseX, cy:BG_Y_SPACE, r:11.2,
             fill:"none",
             stroke:"#78d6ff",
             "stroke-width":1.15,
-            opacity:.34
+            opacity:.32
           }, starLayer);
-          starShape(starLayer,s.spaceX,BACKGROUND_Y_SPACE,5.2,"#edf6ff",.95,false);
+
+          starShape(
+            starLayer,
+            s.baseX,
+            BG_Y_SPACE,
+            5.2,
+            "#edf6ff",
+            .95,
+            false
+          );
         });
 
-        starShape(starLayer,targetSpace.x,targetSpace.y,10.2,"#ffd86a",1,true);
+        starShape(
+          starLayer,
+          targetSpace.x,
+          targetSpace.y,
+          10.2,
+          "#ffd86a",
+          1,
+          true
+        );
 
+        const sightNow = sightIntersection(nowEarth,targetSpace);
+        const sightOpp = sightIntersection(oppositeEarth,targetSpace);
+        const rawRadius = intersectionRadius(targetSpace);
+
+        // 현재/6개월 후 시선은 별에서 멈추지 않고 배경선까지 계속 연결
         if (sightToggle.checked) {
-          const endNow = extendedSightEnd(nowEarth, targetSpace);
-          const endOpp = extendedSightEnd(oppositeEarth, targetSpace);
-
           el("line", {
-            x1:nowEarth.x,y1:nowEarth.y,
-            x2:endNow.x,y2:endNow.y,
+            x1:nowEarth.x, y1:nowEarth.y,
+            x2:sightNow.x, y2:sightNow.y,
             stroke:"#ffd86a",
             "stroke-width":1.65,
-            opacity:.72
+            opacity:.74
           }, sightGroup);
 
           el("line", {
-            x1:oppositeEarth.x,y1:oppositeEarth.y,
-            x2:endOpp.x,y2:endOpp.y,
+            x1:oppositeEarth.x, y1:oppositeEarth.y,
+            x2:sightOpp.x, y2:sightOpp.y,
             stroke:"#f4f8fb",
             "stroke-width":1.1,
             "stroke-dasharray":"4 6",
             opacity:.24
           }, sightGroup);
 
-          // 배경 기준선과 시선이 만나는 지점
           el("circle", {
-            cx:endNow.x, cy:endNow.y, r:3.5,
-            fill:"#ffd86a", opacity:.8
+            cx:sightNow.x, cy:sightNow.y, r:3.8,
+            fill:"#ffd86a", opacity:.9
           }, sightGroup);
 
           el("circle", {
-            cx:endOpp.x, cy:endOpp.y, r:3.2,
-            fill:"#ffffff", opacity:.24
+            cx:sightOpp.x, cy:sightOpp.y, r:3.2,
+            fill:"#ffffff", opacity:.25
           }, sightGroup);
         }
 
-        // 오른쪽: 겉보기 하늘
-        const targetStar = {
-          distance:targetDistance,
-          baseX:TARGET_BASE.baseX,
-          baseY:TARGET_BASE.baseY,
-          size:TARGET_BASE.size
-        };
+        // 동일한 왼쪽 교점 계산으로 원형 겉보기 위치 벡터 생성
+        const apparent = circularApparentVector(
+          theta,
+          sightNow.x,
+          rawRadius
+        );
 
-        parallaxCircle(targetStar, skyPaths, .20, "#ffd86a");
+        const apparentOpp = circularApparentVector(
+          theta+Math.PI,
+          sightOpp.x,
+          rawRadius
+        );
 
-        const targetNow = skyPos(targetStar,theta,true);
-        const targetOpp = skyPos(targetStar,theta+Math.PI,true);
+        // -------------------------------------------------
+        // 왼쪽 상단: 같은 겉보기 위치를 작은 원 궤적으로 표시
+        // -------------------------------------------------
+        const insetCX = 380;
+        const insetCY = 92;
+        const insetR = Math.max(13, Math.min(64, rawRadius*INSET_SCALE));
+
+        drawCirclePath(
+          leftSkyInset,
+          insetCX,
+          insetCY,
+          insetR,
+          "#ffd86a",
+          .28,
+          "3 6"
+        );
 
         el("circle", {
-          cx:targetOpp.x,cy:targetOpp.y,r:5.8,
-          fill:"#ffd86a",opacity:.22
+          cx: insetCX + apparentOpp.x*INSET_SCALE,
+          cy: insetCY + apparentOpp.y*INSET_SCALE,
+          r: 3.8,
+          fill:"#ffd86a",
+          opacity:.18
+        }, leftSkyInset);
+
+        starShape(
+          leftSkyInset,
+          insetCX + apparent.x*INSET_SCALE,
+          insetCY + apparent.y*INSET_SCALE,
+          6.7,
+          "#ffd86a",
+          1,
+          true
+        );
+
+        // -------------------------------------------------
+        // 오른쪽: 왼쪽 시선 교점과 동일한 값을 사용
+        // -------------------------------------------------
+        const skyCX = 380;
+        const skyCY = BG_Y_SKY;
+        const skyR = Math.max(20, Math.min(128, rawRadius*SKY_SCALE));
+
+        drawCirclePath(
+          skyPaths,
+          skyCX,
+          skyCY,
+          skyR,
+          "#ffd86a",
+          .22,
+          "3 6"
+        );
+
+        const skyNow = {
+          x: skyCX + apparent.x*SKY_SCALE,
+          y: skyCY + apparent.y*SKY_SCALE
+        };
+
+        const skyOpp = {
+          x: skyCX + apparentOpp.x*SKY_SCALE,
+          y: skyCY + apparentOpp.y*SKY_SCALE
+        };
+
+        el("circle", {
+          cx:skyOpp.x,
+          cy:skyOpp.y,
+          r:5.6,
+          fill:"#ffd86a",
+          opacity:.20
         }, skyGhosts);
 
-        BG_STARS.forEach((s) => {
-          const apply = farParallax.checked;
-          const now = skyPos(s,theta,apply);
-          const opp = skyPos(s,theta+Math.PI,apply);
+        // 배경 별은 기본적으로 같은 직선상.
+        // 체크 시에만 아주 작은 실제 시차 원을 보여준다.
+        BG_STARS.forEach((s, i) => {
+          let bx = s.baseX;
+          let by = BG_Y_SKY;
 
           if (farParallax.checked) {
-            parallaxCircle(s, skyPaths, .07, "#d7e9f8");
+            const smallR = 5.5;
+            bx += -smallR*Math.cos(theta);
+            by += -smallR*Math.sin(theta);
+
+            drawCirclePath(
+              skyPaths,
+              s.baseX,
+              BG_Y_SKY,
+              smallR,
+              "#d7e9f8",
+              .07,
+              "2 5"
+            );
+
             el("circle", {
-              cx:opp.x,cy:opp.y,r:3,
-              fill:"#ffffff",opacity:.13
+              cx:s.baseX + smallR*Math.cos(theta),
+              cy:BG_Y_SKY + smallR*Math.sin(theta),
+              r:2.7,
+              fill:"#ffffff",
+              opacity:.12
             }, skyGhosts);
           }
 
           el("circle", {
-            cx:now.x,cy:now.y,r:10.5,
+            cx:bx, cy:by, r:10.5,
             fill:"none",
             stroke:"#78d6ff",
             "stroke-width":1.05,
-            opacity:.30
+            opacity:.28
           }, skyStars);
 
-          starShape(skyStars,now.x,now.y,s.size,"#eef7ff",.96,false,"skyGlow3");
+          starShape(
+            skyStars,
+            bx,
+            by,
+            s.size,
+            "#eef7ff",
+            .96,
+            false,
+            "skyGlow4"
+          );
         });
 
-        starShape(skyStars,targetNow.x,targetNow.y,TARGET_BASE.size,"#ffd86a",1,true,"skyGlow3");
+        starShape(
+          skyStars,
+          skyNow.x,
+          skyNow.y,
+          9.3,
+          "#ffd86a",
+          1,
+          true,
+          "skyGlow4"
+        );
       }
 
       function setPlaying(next) {
         playing = next;
         playBtn.textContent = playing ? "Ⅱ" : "▶";
-        playBtn.setAttribute("aria-label", playing ? "공전 일시정지" : "공전 재생");
+        playBtn.setAttribute(
+          "aria-label",
+          playing ? "공전 일시정지" : "공전 재생"
+        );
+
         if (playing) {
           lastT = performance.now();
           raf = requestAnimationFrame(tick);
@@ -541,25 +723,33 @@ APP_HTML = r"""
 
       function tick(t) {
         if (!playing) return;
+
         const dt = Math.min(50,t-lastT);
-        lastT=t;
-        let deg=Number(orbitRange.value);
-        deg=(deg+dt*.0105)%360;
-        orbitRange.value=String(deg);
+        lastT = t;
+
+        let deg = Number(orbitRange.value);
+        deg = (deg + dt*.0105) % 360;
+        orbitRange.value = String(deg);
+
         render();
-        raf=requestAnimationFrame(tick);
+        raf = requestAnimationFrame(tick);
       }
 
       playBtn.addEventListener("click",()=>setPlaying(!playing));
+
       orbitRange.addEventListener("input",()=>{
-        if(playing) setPlaying(false);
+        if (playing) setPlaying(false);
         render();
       });
+
       distanceRange.addEventListener("input",render);
       farParallax.addEventListener("change",render);
       sightToggle.addEventListener("change",render);
 
-      if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      if (
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) {
         setPlaying(false);
       }
 
@@ -569,4 +759,4 @@ APP_HTML = r"""
 </div>
 """
 
-components.html(APP_HTML, height=1040, scrolling=False)
+components.html(APP_HTML, height=1120, scrolling=False)
